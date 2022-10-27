@@ -1,0 +1,64 @@
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+@Autonomous
+public class AutonomousPractice1 extends LinearOpMode {
+  private DcMotor left;
+  private DcMotor right;
+  
+  private final double wheelCircumference = 90*3.14;
+  private final double gearReduction = 3.61*5.23;
+  //values can be found with google (ex. https://www.revrobotics.com/rev-41-1603/)
+  private final double motorCounts = 28.0;
+  
+  private final double countsPerWheelRev = countsPerRev * driveGearReduction;
+  private final double RevPerMM = countsPerWheelRev/Wheel_Circumference;
+  
+  public void runOpMode(){
+    left = hardwareMap.get(DcMotor, "leftMotor");
+    right = hardwareMap.get(DcMotor, "rightMotor");
+    
+    public void drive(tgt){
+      tgt = tgt* RevPerMM;
+      left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      right.setMode(DcMotor.RunMode,STOP_AND_SESET_ENCODER);
+      left.setTargetPosition(tgt);
+      right.setTargetPosition(tgt);
+      left.setMode(RUN_TO_POSITION);
+      right.setMode(RUN_TO_POSITION);
+      left.setPower(1);
+      right.setPower(1);
+    }
+    
+    public void turn(angle, direction){
+      private int ratio = x/360;
+      private int tgt = angle * revPerMM / ratio;
+      if(direction.equals("left"){
+        left.setTargetPosition(tgt);
+        right.setTargetPosition(tgt);
+        left.setMode(RUN_TO_POSITION);
+        right.setMode(RUN_TO_POSITION);
+        left.setPower(-1.0);
+        right.setPower(1.0);
+      }
+      if(direction.equals("right"){
+        left.setTargetPosition(tgt);
+        right.setTargetPosition(tgt);
+        left.setMode(RUN_TO_POSITION);
+        right.setMode(RUN_TO_POSITION);
+        left.setPower(1.0);
+        right.setPower(-1.0);
+      }
+      
+      drive(304);
+      turn(90, "left");
+      drive(152);
+      turn(90, "right");
+      drive(304);
+    }
